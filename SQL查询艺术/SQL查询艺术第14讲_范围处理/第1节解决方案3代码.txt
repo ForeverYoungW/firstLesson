@@ -1,0 +1,11 @@
+WITH C AS
+(
+  SELECT SeqVal,
+         ROW_NUMBER() OVER(ORDER BY SeqVal) AS RowNum
+    FROM NumSeq
+)
+SELECT Cur.SeqVal + 1 AS '开始间隔',
+       Nxt.SeqVal - 1 AS '结束间隔'
+  FROM C AS Cur
+  JOIN C AS Nxt ON Nxt.RowNum = Cur.RowNum + 1
+ WHERE Nxt.SeqVal - Cur.SeqVal > 1;

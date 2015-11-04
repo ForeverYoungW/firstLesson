@@ -1,0 +1,20 @@
+USE [HP-EPM]
+IF OBJECT_ID('dbo.NumSeq', 'U') IS NOT NULL DROP TABLE dbo.NumSeq;
+
+CREATE TABLE dbo.NumSeq
+(
+  SeqVal int NOT NULL
+  CONSTRAINT PK_NumSeq PRIMARY KEY
+);
+
+INSERT INTO DBO.NumSeq(SeqVal) VALUES
+(2),
+(3),
+(11),
+(12),
+(13),
+(27),
+(33),
+(34),
+(35),
+(42);

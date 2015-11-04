@@ -1,0 +1,33 @@
+Step 1:
+SELECT SeqVal
+  FROM NumSeq AS A
+ WHERE NOT EXISTS (SELECT *
+                     FROM NumSeq AS B
+                    WHERE B.SeqVal = A.SeqVal + 1
+                  )
+
+Step 2:
+SELECT SeqVal + 1 AS '开始间隔'
+  FROM NumSeq AS A
+ WHERE NOT EXISTS (SELECT *
+                     FROM NumSeq AS B
+                    WHERE B.SeqVal = A.SeqVal + 1
+                  )
+   AND SeqVal < (SELECT MAX(SeqVal)
+                   FROM NumSeq
+                )
+
+Step 3:
+SELECT SeqVal + 1 AS '开始间隔',
+       (SELECT MIN(C.SeqVal)
+          FROM NumSeq AS C
+         WHERE C.SeqVal > A.SeqVal
+       ) - 1 AS '结束间隔'
+  FROM NumSeq AS A
+ WHERE NOT EXISTS (SELECT *
+                     FROM NumSeq AS B
+                    WHERE B.SeqVal = A.SeqVal +1
+                  )
+   AND SeqVal < (SELECT MAX(SeqVal)
+                   FROM NumSeq
+                )

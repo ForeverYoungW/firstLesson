@@ -1,0 +1,21 @@
+Step 1:
+SELECT SeqVal,
+       ROW_NUMBER() OVER(ORDER BY SeqVal) AS ROWNUM
+  FROM NumSeq
+
+Step 2:
+SELECT SeqVal,
+       SeqVal - ROW_NUMBER() OVER(ORDER BY SeqVal) AS DIFF
+  FROM NumSeq
+
+Step 3:
+WITH D AS
+(
+  SELECT SeqVal,
+         SeqVal - ROW_NUMBER() OVER(ORDER BY SeqVal) AS GRP
+    FROM NumSeq
+)
+SELECT MIN(SeqVal) AS '¿ªÊ¼·¶Î§',
+       MAX(SeqVal) AS '½áÊø·¶Î§'
+  FROM D
+ GROUP BY GRP;

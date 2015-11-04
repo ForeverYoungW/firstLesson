@@ -1,0 +1,16 @@
+USE [HP-EPM]
+IF OBJECT_ID('Scores') IS NOT NULL DROP TABLE Scores;
+CREATE TABLE Scores
+(
+  Name varchar(20) NOT NULL,
+  Course varchar(20) NOT NULL,
+  Score INT NOT NULL
+);
+
+INSERT INTO Scores(Name, Course, Score) VALUES
+('张三', 'Java', 90),
+('张三', 'SQL', 95),
+('张三', 'C#', 89),
+('李四', 'Java', 85),
+('李四', 'SQL', 82),
+('李四', 'C#', 90);

@@ -1,0 +1,9 @@
+SELECT DATEDIFF(DAY, ALLEN_HD, WARD_HD)
+  FROM (SELECT HIREDATE AS WARD_HD
+          FROM EMP
+         WHERE ENAME = 'WARD'
+       ) AS X
+ CROSS JOIN (SELECT HIREDATE AS ALLEN_HD
+               FROM EMP
+              WHERE ENAME = 'ALLEN'
+            ) AS Y;

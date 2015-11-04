@@ -1,0 +1,12 @@
+SELECT CustId,
+       SUM(CASE EmpId WHEN 1 THEN Qty END) AS [1],
+       SUM(CASE EmpId WHEN 2 THEN Qty END) AS [2],
+       SUM(CASE EmpId WHEN 3 THEN Qty END) AS [3]
+  FROM Orders
+ GROUP BY CustId
+
+SELECT CustId, [1], [2], [3]
+  FROM (SELECT EmpId, CustId, Qty
+          FROM Orders
+       ) AS D
+ PIVOT (SUM(Qty) FOR EmpId IN ([1], [2], [3])) AS P;

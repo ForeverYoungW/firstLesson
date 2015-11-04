@@ -1,0 +1,25 @@
+WITH StartingPoints AS
+(
+  SELECT SeqVal,
+         ROW_NUMBER() OVER(ORDER BY SeqVal) AS ROWNUM
+    FROM NumSeq AS A
+   WHERE NOT EXISTS (SELECT *
+                       FROM NumSeq AS B
+                      WHERE B.SeqVal = A.SeqVal -1
+                    )
+),
+EndingPoints AS
+(
+  SELECT SeqVal,
+         ROW_NUMBER() OVER(ORDER BY SeqVal) AS ROWNUM
+    FROM NumSeq AS A
+   WHERE NOT EXISTS (SELECT *
+                       FROM NumSeq AS B
+                      WHERE B.SeqVal = A.SeqVal + 1
+                    )
+)
+SELECT S.SeqVal AS '¿ªÊ¼·¶Î§',
+       E.SeqVal AS '½áÊø·¶Î§'
+  FROM StartingPoints AS S
+  JOIN EndingPoints AS E
+    ON S.ROWNUM = E.ROWNUM

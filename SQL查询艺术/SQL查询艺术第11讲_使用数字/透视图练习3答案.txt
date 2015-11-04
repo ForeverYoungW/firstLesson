@@ -1,0 +1,9 @@
+SELECT Course AS '课程',
+       SUM(CASE Name WHEN '张三' THEN Score END) AS '张三',
+       SUM(CASE Name WHEN '李四' THEN Score END) AS '李四'
+  FROM Scores
+ GROUP BY Course
+
+SELECT Course AS '课程', 张三, 李四
+  FROM Scores
+ PIVOT (SUM(Score) FOR Name IN (张三, 李四)) AS P;

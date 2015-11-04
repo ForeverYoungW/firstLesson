@@ -1,0 +1,6 @@
+SELECT EMPNO,
+       ENAME,
+       SAL,
+       SUM(SAL) OVER() AS TOTAL,
+       CAST((SAL/SUM(SAL) OVER())*100 AS DECIMAL(18,2)) AS PCT1
+  FROM EMP

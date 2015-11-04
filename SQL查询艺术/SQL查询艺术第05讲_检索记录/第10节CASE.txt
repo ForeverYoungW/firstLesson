@@ -1,0 +1,22 @@
+
+SELECT EMPNO,
+       ENAME,
+       DEPTNO,
+       CASE DEPTNO
+         WHEN 10 THEN 'ACCOUNTING'
+         WHEN 20 THEN 'RESEARCH'
+         WHEN 30 THEN 'SALES'
+         ELSE 'OPERATIONS'
+       END AS DNAME
+  FROM EMP;
+
+SELECT EMPNO,
+       ENAME,
+       DEPTNO,
+       CASE
+         WHEN DEPTNO = 10 THEN 'ACCOUNTING'
+         WHEN DEPTNO = 20 THEN 'RESEARCH'
+         WHEN DEPTNO = 30 THEN 'SALES'
+         ELSE 'OPERATIONS'
+       END AS DNAME
+  FROM EMP;

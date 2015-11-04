@@ -1,0 +1,19 @@
+WITH X AS
+(
+SELECT YEAR(MIN(HIREDATE)) AS YR,
+       1 AS CNT
+  FROM EMP
+ UNION ALL
+SELECT YR + 1,
+       CNT + 1
+  FROM X
+ WHERE CNT < 10
+)
+SELECT X.YR, COALESCE(E.CNT, 0) AS CNT
+  FROM X
+  LEFT JOIN (SELECT YEAR(HIREDATE) AS YR,
+                    COUNT(*) AS CNT
+               FROM EMP
+              GROUP BY YEAR(HIREDATE)
+            ) AS E
+    ON X.YR = E.YR

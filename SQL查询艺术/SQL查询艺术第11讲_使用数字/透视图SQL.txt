@@ -1,0 +1,36 @@
+
+SELECT EmpId, CustId, SUM(Qty) AS SumQty
+  FROM Orders
+ GROUP BY EmpId, CustId
+
+SELECT EmpId,
+       SUM(CASE WHEN CustId = 'A' THEN Qty END) AS A,
+       SUM(CASE WHEN CustId = 'B' THEN Qty END) AS B,
+       SUM(CASE WHEN CustId = 'C' THEN Qty END) AS C,
+       SUM(CASE WHEN CustId = 'D' THEN Qty END) AS D
+  FROM Orders
+ GROUP BY EmpId
+
+SELECT EmpId, A, B, C, D
+  FROM (SELECT EmpId, CustId, Qty
+          FROM Orders
+       ) AS D
+ PIVOT (SUM(Qty) FOR CustId IN (A, B, C, D)) AS P;
+
+SELECT EmpId, A, B, C, D
+  FROM Orders
+ PIVOT (SUM(Qty) FOR CustId IN (A, B, C, D)) AS P
+
+SELECT EmpId,
+       SUM(CASE WHEN CustId = 'A' THEN Qty END) AS A,
+       SUM(CASE WHEN CustId = 'B' THEN Qty END) AS B,
+       SUM(CASE WHEN CustId = 'C' THEN Qty END) AS C,
+       SUM(CASE WHEN CustId = 'D' THEN Qty END) AS D
+  FROM Orders
+ GROUP BY EmpId, OrderDate, EmpId;
+ 
+SELECT CustId, [1], [2], [3]
+  FROM (SELECT EmpId, CustId, Qty
+          FROM Orders
+       ) AS D
+ PIVOT (SUM(Qty) FOR EmpId IN ([1], [2], [3])) AS P;

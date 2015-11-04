@@ -1,0 +1,11 @@
+SELECT X.*,
+       DATEDIFF(DAY, X.HIREDATE, X.NEXT_HD) AS DIFF
+  FROM (SELECT E.DEPTNO,
+               E.ENAME,
+               E.HIREDATE,
+               (SELECT MIN(D.HIREDATE)
+                  FROM EMP AS D
+                 WHERE D.HIREDATE > E.HIREDATE) AS NEXT_HD
+          FROM EMP AS E
+         WHERE E.DEPTNO = 10
+       ) AS X

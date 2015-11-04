@@ -1,0 +1,19 @@
+Step 1:
+SELECT SeqVal AS cur,
+       (SELECT MIN(B.SeqVal)
+          FROM NumSeq AS B
+         WHERE B.SeqVal > A.SeqVal
+       ) AS nxt
+  FROM NumSeq AS A;
+
+Step 2:
+SELECT cur + 1 AS '开始间隔',
+       nxt - 1 AS '结束间隔'
+  FROM (SELECT SeqVal AS cur,
+               (SELECT MIN(B.SeqVal)
+                  FROM NumSeq AS B
+                 WHERE B.SeqVal > A.SeqVal
+               ) AS nxt
+          FROM NumSeq AS A
+       ) AS D
+ WHERE nxt - cur > 1;

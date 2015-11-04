@@ -1,0 +1,25 @@
+
+SET NOCOUNT ON;
+IF OBJECT_ID('DBO.SALES') IS NOT NULL
+  DROP TABLE DBO.SALES;
+GO
+
+CREATE TABLE DBO.SALES
+(
+  EMPID VARCHAR(10) NOT NULL PRIMARY KEY,
+  MGRID VARCHAR(10) NOT NULL,
+  QTY INT NOT NULL
+);
+
+INSERT INTO DBO.SALES(EMPID, MGRID, QTY) VALUES
+('A', 'Z', 300),
+('B', 'X', 100),
+('C', 'X', 200),
+('D', 'Y', 200),
+('E', 'Z', 250),
+('F', 'Z', 300),
+('G', 'X', 100),
+('H', 'Y', 150),
+('I', 'X', 250),
+('J', 'Z', 100),
+('K', 'Y', 200);

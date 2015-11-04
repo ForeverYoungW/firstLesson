@@ -1,0 +1,10 @@
+SELECT Name,
+       SUM(CASE Course WHEN 'Java' THEN Score END) AS 'Java',
+       SUM(CASE Course WHEN 'SQL' THEN Score END) AS 'SQL',
+       SUM(CASE Course WHEN 'C#' THEN Score END) AS 'C#'
+  FROM Scores
+ GROUP BY Name
+
+SELECT Name, Java, SQL, C#
+  FROM Scores
+ PIVOT (SUM(Score) FOR Course IN (Java, SQL, C#)) AS P;

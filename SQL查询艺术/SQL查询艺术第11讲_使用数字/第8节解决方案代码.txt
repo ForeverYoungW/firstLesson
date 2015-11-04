@@ -1,0 +1,7 @@
+SELECT AVG(SAL)
+  FROM (SELECT SAL,
+               MIN(SAL) OVER() AS MIN_SAL,
+               MAX(SAL) OVER() AS MAX_SAL
+          FROM EMP
+       ) X
+ WHERE SAL NOT IN (MIN_SAL, MAX_SAL);
